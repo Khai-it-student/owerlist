@@ -27,7 +27,16 @@ class OwersStorage {
           'CREATE TABLE owers(name TEXT PRIMARY KEY, debt DOUBLE)',
         );
       },
-      version: 1,
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+          // Виконай SQL-запит для створення нової таблиці
+          await db.execute(
+            'CREATE TABLE нова_таблиця(id INTEGER PRIMARY KEY, назва TEXT, кількість DOUBLE)',
+          );
+        }
+        // Додай інші умови для майбутніх версій
+      },
+      version: 2,
     );
   }
 
